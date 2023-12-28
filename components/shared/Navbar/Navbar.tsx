@@ -1,10 +1,14 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import { buttonVariants } from "@/components/ui/button"
+import Lottie from "lottie-react";
 
-import { ThemeToggle } from './ThemeToggle'
 import { social } from '@/lib/data';
+import logoAnimation from '@/lib/logoAnimation.json'
+import NavMenu from './NavMenu';
+
+
 
 const Navbar = () => {
   const navRef = useRef<HTMLDivElement>(null)
@@ -33,11 +37,17 @@ const Navbar = () => {
       <div className='w-full px-2 lg:container grid lg:grid-cols-[4fr_2fr_3fr_1.5fr] grid-cols-2 h-full items-center gap-2'>
         {/* Logo */}
         <div className='min-h-[54px] w-full h-full dark:bg-darkgray flex items-center rounded-full px-5'>
-          <div className='font-semibold select-none cursor-pointer'>
-            <span>Syuro</span>
-            <span className='text-primary'>.dev</span>
+
+          <div className='font-semibold select-none cursor-pointer relative w-fit h-full flex items-center justify-start'>
+            <Lottie animationData={logoAnimation} loop={false} className='absolute -top-1/2 -translate-y-[35px] size-44 -left-[75px]' />
+
+            <div className='ms-[40px] hidden md:block'>
+              <span>Syuro</span>
+              <span className='text-primary'>.dev</span>
+            </div>
           </div>
-          <div className='flex flex-col w-full justify-end'>
+
+          <div className='flex flex-col w-full justify-end z-10'>
             <span className='uppercase text-secondary-foreground text-xs font-semibold text-end line-clamp-1 opacity-75 pointer-events-none select-none'>fullstack</span>
             <span className='uppercase text-secondary-foreground text-xs font-semibold text-end line-clamp-1 opacity-75 pointer-events-none select-none'>web developer</span>
           </div>
@@ -63,14 +73,10 @@ const Navbar = () => {
         </div>
 
         {/* Menu */}
-        <div className="w-full h-full rounded-full dark:bg-lightgray dark:hover:bg-mediumgray transition-colors relative flex items-center p-5 group cursor-pointer">
-          <span className='text-background group-hover:text-primary-foreground transition-colors font-semibold'>Menu</span>
-
-          <div className='absolute size-2 top-5 right-20 bg-background rounded-full group-hover:bg-lightgray transition-all group-hover:top-7'></div>
-          <div className='absolute size-4 top-6 right-14 bg-background rounded-full group-hover:bg-lightgray transition-all group-hover:top-4'></div>
-          <div className='absolute size-2 top-5 right-10 bg-background rounded-full group-hover:bg-lightgray transition-all group-hover:top-7'></div>
-          <div className='absolute size-4 top-6 right-4 bg-background rounded-full group-hover:bg-lightgray transition-all group-hover:top-4'></div>
+        <div className='relative w-full h-full'>
+          <NavMenu />
         </div>
+
         {/* <ThemeToggle /> */}
 
         {/* Contract */}
@@ -81,5 +87,7 @@ const Navbar = () => {
     </nav>
   )
 }
+
+
 
 export default Navbar
